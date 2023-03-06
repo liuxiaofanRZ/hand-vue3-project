@@ -1,15 +1,10 @@
 <template>
-  <div class="box">你好啊！{{ greet }}</div>
+  <div class="box">你好啊！</div>
 </template>
 
-<script>
-export default {
-  name: 'app',
-  data() {
-    return {
-      greet: '你好',
-    }
-  },
+<script setup>
+const testFunction = ()=>{
+  console.log('bbb');
 }
 </script>
 
