@@ -1,2 +1,4 @@
-let app = document.querySelector("#app");
-app.innerHTML = '内容内容内容'
+import { createApp } from 'vue'
+import App from './App.vue'
+const app = createApp(App)
+app.mount('#root')
