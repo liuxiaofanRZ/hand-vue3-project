@@ -10,6 +10,11 @@ module.exports = {
     path: path.resolve(__dirname, 'dist'),
     filename: 'js/[name].js',
   },
+  devServer: {
+    port: 8080,
+    open: true,
+
+  },
   module: {
     rules: [
       {
