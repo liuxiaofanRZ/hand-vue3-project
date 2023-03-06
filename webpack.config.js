@@ -8,4 +8,10 @@ module.exports = {
     path: path.resolve(__dirname, 'dist'),
     filename: 'js/[name].js',
   },
+  plugins: [
+    new HtmlWebpackPlugin({
+      title: 'Hello World!',
+      template: path.resolve(__dirname, 'index.html'),
+    }),
+  ],
 }
