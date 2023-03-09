@@ -6,7 +6,7 @@ const SpeedMeasurePlugin = require('speed-measure-webpack-plugin')
 const smp = new SpeedMeasurePlugin()
 
 const webpackConfig = {
-  mode: 'development',
+  mode: process.env.NODE_ENV,
   entry: path.resolve(__dirname, './src/main.js'),
   output: {
     path: path.resolve(__dirname, 'dist'),
@@ -18,6 +18,14 @@ const webpackConfig = {
   },
   module: {
     rules: [
+      // 处理图片
+      {
+        test: /\.(png|jpg|gif)$/i,
+        type: "asset",
+        generator: {
+          filename:'img/[hash][ext][query]'
+        }
+      },
       {
         test: /\.vue$/,
         loader: 'vue-loader',
