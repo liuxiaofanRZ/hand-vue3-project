@@ -2,8 +2,10 @@ const path = require('path')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const { CleanWebpackPlugin } = require('clean-webpack-plugin')
 const { VueLoaderPlugin } = require('vue-loader')
+const SpeedMeasurePlugin = require('speed-measure-webpack-plugin')
+const smp = new SpeedMeasurePlugin()
 
-module.exports = {
+const webpackConfig = {
   mode: 'development',
   entry: path.resolve(__dirname, './src/main.js'),
   output: {
@@ -13,7 +15,6 @@ module.exports = {
   devServer: {
     port: 8080,
     open: true,
-
   },
   module: {
     rules: [
@@ -23,7 +24,7 @@ module.exports = {
       },
       {
         test: /\.css$/i,
-        use: ["style-loader", "css-loader"],
+        use: ['style-loader', 'css-loader'],
       },
       {
         test: /\.js$/,
@@ -31,15 +32,13 @@ module.exports = {
         use: {
           loader: 'babel-loader',
           options: {
-            presets: [
-              ['@babel/preset-env']
-            ]
-          }
-        }
+            presets: [['@babel/preset-env']],
+          },
+        },
       },
-      
     ],
   },
+
   plugins: [
     new HtmlWebpackPlugin({
       title: 'Hello World!',
@@ -49,3 +48,11 @@ module.exports = {
     new CleanWebpackPlugin(),
   ],
 }
+const VueLoaderPluginIndex = webpackConfig.plugins.findIndex(
+  (e) => e.constructor.name === 'VueLoaderPlugin'
+)
+const VueLoaderPluginSave = webpackConfig.plugins[VueLoaderPluginIndex]
+const configToExport = smp.wrap(webpackConfig)
+configToExport.plugins[VueLoaderPluginIndex] = VueLoaderPluginSave
+
+module.exports = configToExport
