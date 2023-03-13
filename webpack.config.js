@@ -1,4 +1,5 @@
 const path = require('path')
+const webpack = require("webpack")
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const { CleanWebpackPlugin } = require('clean-webpack-plugin')
 const { VueLoaderPlugin } = require('vue-loader')
@@ -53,6 +54,14 @@ const webpackConfig = {
     }),
     new VueLoaderPlugin(),
     new CleanWebpackPlugin(),
+    new webpack.DefinePlugin({
+      PRODUCTION: JSON.stringify('true'),
+      VERSION: JSON.stringify('5fa3b9'),
+      BROWSER_SUPPORTS_HTML5: true,
+      TWO: '1+1',
+      'nodeEnv.test':JSON.stringify(1123123),
+      "process.env.HELLO_TEST":JSON.stringify('lalalalal')
+    })
   ],
 }
 const VueLoaderPluginIndex = webpackConfig.plugins.findIndex(
