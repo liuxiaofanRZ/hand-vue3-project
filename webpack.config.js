@@ -6,7 +6,6 @@ const SpeedMeasurePlugin = require('speed-measure-webpack-plugin')
 const smp = new SpeedMeasurePlugin()
 
 const webpackConfig = {
-  mode: process.env.NODE_ENV,
   entry: path.resolve(__dirname, './src/main.js'),
   output: {
     path: path.resolve(__dirname, 'dist'),
@@ -63,4 +62,11 @@ const VueLoaderPluginSave = webpackConfig.plugins[VueLoaderPluginIndex]
 const configToExport = smp.wrap(webpackConfig)
 configToExport.plugins[VueLoaderPluginIndex] = VueLoaderPluginSave
 
-module.exports = configToExport
+module.exports = function (env,argv) {
+  console.log(env.hello)
+  console.log('------')
+  console.log(argv)
+  console.log('------')
+  // console.log(process.env)
+  return configToExport
+}
