@@ -63,7 +63,7 @@ const configToExport = smp.wrap(webpackConfig)
 configToExport.plugins[VueLoaderPluginIndex] = VueLoaderPluginSave
 
 module.exports = function (env,argv) {
-  console.log(env.hello)
+  console.log(env)
   console.log('------')
   console.log(argv)
   console.log('------')
